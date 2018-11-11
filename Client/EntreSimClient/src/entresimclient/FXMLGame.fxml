@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="entresimclient.FXMLGameController">
+    <children>
+      <AnchorPane layoutX="531.0" layoutY="218.0" prefHeight="499.0" prefWidth="547.0" style="-fx-border-color: black; -fx-border-style: solid; -fx-border-width: 1; -fx-background-color: -fx-shadow-highlight-color, -fx-body-color, -fx-outer-border, -fx-inner-border; -fx-background-insets: 0 0 -1 0, 0, 1, 2;">
+         <children>
+              <ScrollPane hbarPolicy="NEVER" layoutX="275.0" layoutY="58.0" prefHeight="370.0" prefWidth="265.0" vbarPolicy="ALWAYS">
+               <content>
+                      <VBox fx:id="vboxIndiv" alignment="TOP_CENTER" prefHeight="300.0" prefWidth="234.0" spacing="10.0">
+                          <padding>
+                              <Insets top="20.0" />
+                          </padding>
+                      </VBox>
+               </content>
+              </ScrollPane>
+              <ScrollPane hbarPolicy="NEVER" layoutX="7.0" layoutY="58.0" prefHeight="370.0" prefWidth="265.0" vbarPolicy="ALWAYS">
+                  <content>
+                      <VBox fx:id="vboxJoint" alignment="TOP_CENTER" prefHeight="300.0" prefWidth="234.0" spacing="10.0">
+                          <padding>
+                              <Insets top="20.0" />
+                          </padding>
+                     <children>
+                          <Button fx:id="btnPartner" mnemonicParsing="false" onAction="#handleBtnPartner" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: linear-gradient(#ff5400, #be1d00); -fx-background-radius: 30; -fx-background-insets: 0;" text="Request Partnership" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                              <font>
+                                  <Font size="11.0" />
+                              </font>
+                          </Button>
+                     </children>
+                      </VBox>
+                  </content>
+              </ScrollPane>
+              <Button fx:id="btnLock" layoutX="274.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleBtnLock" prefHeight="28.0" prefWidth="265.0" style="-fx-background-color: linear-gradient(#ffd65b, #e68400),        linear-gradient(#ffef84, #f2ba44),        linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0)); -fx-background-insets: 0,1,2,3,0; -fx-background-radius: 30; -fx-text-fill: #654b00; -fx-font-weight: bold; -fx-font-size: 12px;" text="End Turn" textAlignment="CENTER" wrapText="true" />
+              <Button fx:id="btnRequest" layoutX="12.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleBtnRequest" prefHeight="27.0" prefWidth="528.0" style="-fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" text="Request Custom Decision" />
+              <Button fx:id="btnJoint" layoutX="12.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleBtnJoint" prefHeight="28.0" prefWidth="251.0" style="-fx-background-color: linear-gradient(#ffd65b, #e68400),        linear-gradient(#ffef84, #f2ba44),        linear-gradient(#ffea6a, #efaa22),        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));; -fx-background-insets: 0,1,2,3,0; -fx-background-radius: 30; -fx-text-fill: #654b00; -fx-font-weight: bold; -fx-font-size: 14px;" text="Lock In Joint Decision" textAlignment="CENTER" wrapText="true" />
+              <ComboBox fx:id="cmbPlayers" layoutX="7.0" layoutY="31.0" prefHeight="27.0" prefWidth="265.0" promptText="Select Player" style="-fx-background-radius: 5,4,3,5; -fx-background-insets: 0,1,2,0; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" />
+            <Label alignment="CENTER" layoutX="7.0" layoutY="6.0" prefHeight="17.0" prefWidth="265.0" text="Joint Decision List" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="274.0" layoutY="6.0" prefHeight="17.0" prefWidth="265.0" text="Individual Decision List" textAlignment="CENTER" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="lblNotify" layoutX="94.0" layoutY="638.0" prefHeight="76.0" prefWidth="430.0" textAlignment="JUSTIFY" textFill="#09dd1b" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+        <TextArea fx:id="txtLog" editable="false" layoutX="7.0" layoutY="7.0" prefHeight="76.0" prefWidth="517.0" wrapText="true" />
+        <TextArea fx:id="txtInfo" layoutX="534.0" layoutY="7.0" prefHeight="177.0" prefWidth="265.0" wrapText="true" />
+        <Button fx:id="btnInfo" layoutX="8.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleBtnInfo" prefHeight="60.0" prefWidth="60.0">
+         <graphic>
+            <ImageView fitHeight="60.0" fitWidth="60.0">
+               <image>
+                  <Image url="@resources/info.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <AnchorPane fx:id="paneCanvas" layoutX="7.0" layoutY="84.0" prefHeight="300.0" prefWidth="517.0" style="-fx-background-color: -fx-shadow-highlight-color, -fx-body-color, -fx-outer-border, -fx-inner-border; -fx-background-insets: 0 0 -1 0, 0, 1, 2;" />
+      <AnchorPane fx:id="paneComparator" layoutX="7.0" layoutY="387.0" prefHeight="190.0" prefWidth="517.0" style="-fx-background-color: -fx-shadow-highlight-color, -fx-body-color, -fx-outer-border, -fx-inner-border; -fx-background-insets: 0 0 -1 0, 0, 1, 2;" />
+        <GridPane layoutX="803.0" layoutY="3.0" prefHeight="50.0" prefWidth="265.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Your Name:" />
+                <Label fx:id="lblName" GridPane.columnIndex="1" />
+                <Label text="Your Role:" GridPane.rowIndex="1" />
+                <Label fx:id="lblRole" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+        <GridPane layoutX="804.0" layoutY="51.0" prefHeight="170.0" prefWidth="265.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="146.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="39.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="0.0" prefWidth="37.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label fx:id="lblFinanceTitle" text="Finance [HIDDEN]" />
+                <Label fx:id="lblExploreTitle" text="Exploratory [HIDDEN]" GridPane.rowIndex="1" />
+                <Label fx:id="lblExploitTitle" text="Exploitative [HIDDEN]" GridPane.rowIndex="2" />
+                <Label fx:id="lblFinance" alignment="CENTER_RIGHT" text="0" GridPane.columnIndex="1" />
+                <Label fx:id="lblExplore" alignment="CENTER_RIGHT" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="lblExploit" alignment="CENTER_RIGHT" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label fx:id="lblIncomeTitle" text="Income" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Label>
+                <Label fx:id="lblChange" alignment="CENTER_RIGHT" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Button fx:id="btnDisplayFinance" mnemonicParsing="false" onAction="#handleBtnDisplayFinance" text="Show" GridPane.columnIndex="2" />
+                <Button fx:id="btnDisplayExplore" mnemonicParsing="false" onAction="#handleBtnDisplayExplore" text="Show" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <Button fx:id="btnDisplayExploit" mnemonicParsing="false" onAction="#handleBtnDisplayExploit" text="Show" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Line endX="170.0" startX="-100.0" translateY="-14.0" GridPane.rowIndex="3" />
+            <Label fx:id="lblExploreChangeTitle" text="Exploratory per turn" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblExploitChangeTitle" text="Exploitative per turn" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font></Label>
+            <Label fx:id="lblExploreChange" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="lblExploitChange" text="0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            </children>
+        </GridPane>
+      <AnchorPane fx:id="paneLegend" layoutX="8.0" layoutY="580.0" prefHeight="56.0" prefWidth="517.0" />
+      <Button fx:id="btnDetails" layoutX="534.0" layoutY="188.0" mnemonicParsing="false" onAction="#handleBtnDetails" prefHeight="27.0" prefWidth="265.0" text="View More Details" />
+    </children>
+</AnchorPane>

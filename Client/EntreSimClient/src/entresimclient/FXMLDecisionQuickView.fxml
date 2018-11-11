@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="537.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="entresimclient.FXMLDecisionQuickViewController">
+       <children>
+      <TextField fx:id="txtTitle" editable="false" layoutX="14.0" layoutY="14.0" promptText="Title" />
+      <TextArea fx:id="txtDescription" editable="false" layoutX="13.0" layoutY="75.0" prefHeight="146.0" prefWidth="404.0" promptText="Description" wrapText="true" />
+      <TextField fx:id="txtType" editable="false" layoutX="14.0" layoutY="44.0" promptText="Individual or Joint" />
+      <Button layoutX="317.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleBtnClose" prefHeight="27.0" prefWidth="100.0" text="Close" />
+      <TabPane layoutX="14.0" layoutY="229.0" prefHeight="257.0" prefWidth="404.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Prerequisites">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="listPrereqs" layoutX="14.0" layoutY="12.0" prefHeight="200.0" prefWidth="380.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Effects">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableEffects" layoutX="14.0" layoutY="12.0" prefHeight="200.0" prefWidth="370.0">
+                          <columns>
+                            <TableColumn fx:id="colProbability" prefWidth="75.0" text="Probability" />
+                              <TableColumn fx:id="colAffected" prefWidth="71.0" text="Affected" />
+                            <TableColumn fx:id="colEffects" prefWidth="223.0" text="Effects" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+       </children>
+
+</AnchorPane>
