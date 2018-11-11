@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="entresimeditor.FXMLPrerequisiteSetterController">
+   <children>
+      <CheckBox fx:id="checkRD_applicant" layoutX="10.0" layoutY="424.0" mnemonicParsing="false" selected="true" text="R&amp;D" />
+      <CheckBox fx:id="checkM_applicant" layoutX="10.0" layoutY="451.0" mnemonicParsing="false" selected="true" text="Manufacturer" />
+      <CheckBox fx:id="checkFB_applicant" layoutX="10.0" layoutY="478.0" mnemonicParsing="false" selected="true" text="Financial Backer" />
+      <Label layoutX="10.0" layoutY="361.0" prefHeight="59.0" prefWidth="190.0" text="Applicant must be one of the following roles:" wrapText="true" />
+      <Button fx:id="btnOk" layoutX="10.0" layoutY="505.0" mnemonicParsing="false" onAction="#handleBtnOk" prefHeight="27.0" prefWidth="190.0" text="Ok" />
+      <Button fx:id="btnCancel" layoutX="203.0" layoutY="505.0" mnemonicParsing="false" onAction="#handleBtnCancel" prefHeight="27.0" prefWidth="190.0" text="Cancel" />
+      <Label fx:id="lblRecipient" layoutX="209.0" layoutY="361.0" prefHeight="59.0" prefWidth="190.0" text="Recipient must be one of the following roles:" wrapText="true" />
+      <CheckBox fx:id="checkRD_recipient" layoutX="209.0" layoutY="424.0" mnemonicParsing="false" selected="true" text="R&amp;D" />
+      <CheckBox fx:id="checkM_recipient" layoutX="209.0" layoutY="451.0" mnemonicParsing="false" selected="true" text="Manufacturer" />
+      <CheckBox fx:id="checkFB_recipient" layoutX="209.0" layoutY="478.0" mnemonicParsing="false" selected="true" text="Financial Backer" />
+      <Line endX="300.0" layoutX="105.0" layoutY="361.0" startX="-100.0" />
+      <TextField fx:id="txtFinance" alignment="CENTER_RIGHT" layoutX="324.0" layoutY="266.0" prefHeight="27.0" prefWidth="70.0" text="0" />
+      <TextField fx:id="txtExplore" alignment="CENTER_RIGHT" layoutX="324.0" layoutY="297.0" prefHeight="27.0" prefWidth="70.0" text="0" />
+      <TextField fx:id="txtExploit" alignment="CENTER_RIGHT" layoutX="324.0" layoutY="328.0" prefHeight="27.0" prefWidth="70.0" text="0" />
+      <Label layoutX="10.0" layoutY="243.0" text="Minimum resources required to make decision:" />
+      <Label layoutX="10.0" layoutY="271.0" text="Finance" />
+      <Label layoutX="10.0" layoutY="302.0" text="Exploratory Knowledge" />
+      <Label layoutX="10.0" layoutY="333.0" text="Exploitative Knowledge" />
+      <Line endX="302.0" layoutX="105.0" layoutY="241.0" startX="-100.0" />
+      <ListView fx:id="listMust" layoutX="17.0" layoutY="38.0" prefHeight="170.0" prefWidth="180.0" />
+      <ListView fx:id="listNot" layoutX="211.0" layoutY="38.0" prefHeight="170.0" prefWidth="180.0" />
+      <Label layoutX="17.0" layoutY="4.0" prefHeight="34.0" prefWidth="180.0" text="Must have made the following decisions:" textAlignment="CENTER" wrapText="true" />
+      <Label layoutX="211.0" layoutY="4.0" prefHeight="34.0" prefWidth="180.0" text="Must NOT have made the following decisions:" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="16.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleBtnCheckMust" prefHeight="27.0" prefWidth="180.0" text="Check Selected Decision" />
+      <Button layoutX="211.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleBtnCheckNot" prefHeight="27.0" prefWidth="180.0" text="Check Selected Decision" />
+   </children>
+</AnchorPane>
