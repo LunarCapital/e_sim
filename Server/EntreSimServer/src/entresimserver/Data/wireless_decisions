@@ -1,0 +1,178 @@
+//FORMAT IS:
+//ID (make sure this is unique)
+//TITLE
+//DESCRIPTION (in quotes "")
+//TYPE (Indiv or Joint)
+//PREREQUISITES (D=3 means decision 3 must be made beforehand, N=3 means decision 3 must NOT have been made beforehand, finance=10 means at least 10 finance must be possessed.  a_role (applicant) and r_role (recipient) restrict roles of players (Use "R" "M" and "F").  "none" used for no prereqs.)
+//EFFECTS (abbreviations are: explore = exploratory, exploit = exploitative, finance = financial, f_change = ongoing financial
+//
+//For joint decisions, EFFECTS takes three lines: one for the applicant, recipient, and both.
+//If a party is unaffected (, you can placehold the line with finance=0:0
+//the special effect 'join' is unique to the joint venture decision, and 'jointgrant' is unique to joint Apply for Grants.
+//Please ensure that these two are not encapsulated by probability brackets (ie no P=0.5(jointgrant)) as in the case of jointgrant,
+//probability is written within the software.
+//
+//note that outcome format is: abbreviation=NUMBER:DELAY and are separated by a space.
+//an outcome can be linked with a bonus for related players (like a FB who financed another player) with a double equals like so: 
+//finance==1:0
+//Linked outcomes incur the same effect on whatever FB financed said player.  
+//
+//For probabilities, use P=probability_magnitude(effect=magnitude:delay effect2=magnitude2:delay) and so on.
+//For example,
+//P=0.5(finance=1:0 exploit=1:0 explore=1:0)
+//
+//EXAMPLE
+//1
+//Do Something
+//"Do something.  Has a chance to increase your financial resources by 10, but starting from the next round decreases it by 1 each turn"
+//Indiv
+//none
+//P=0.5(finance=10:0) f_change=-1:1
+//
+//If you want to change this file, please create a backup first,
+//ensure the formatting is all correct and make sure that the outcomes match the description.
+
+0
+Hire Professional
+"Hire a professional for marketing or business development.  Increases exploitative knowledge by 2, but costs 2 units of financial resources."
+Indiv
+none
+exploit=2:0 finance=-2:0 
+
+1
+Hire CEO
+"Hire a CEO with experience in start-ups, particularly capital fund raising.  Will improve exploitative research by 3 and costs 3 unit of finance, but you will earn back the finance you lost over three turns.  Can only be done once."
+Indiv
+N=1 
+P=1.0(exploit=3:0) P=1.0(f_change=-3:0) P=1.0(f_change=1:3) 
+
+2
+Travel for Funds
+"Travel to raise funds from other Australian capital cities.  Will cost 1 unit of finance for travel expenses, but has a 50% chance to increase gain 3 units of finance back the next round."
+Indiv
+none
+finance=-1:0 P=0.5(finance=3:1) 
+
+3
+Tech Development - Efficiency
+"Further technology development to improve efficiency.  Costs 2 units of finance but grants 1 unit of exploratory knowledge and 2 units of exploitative knowledge."
+Indiv
+none
+finance=-2:0 explore=1:0 exploit=2:0 
+
+4
+Tech Development - New Ideas
+"Further technology development in pursuit of new ideas.  Costs 2 units of finance but grants 2 units of exploratory knowledge and 1 unit of exploitative knowledge."
+Indiv
+none
+finance=-2:0 explore=2:0 exploit=1:0 
+
+5
+Apply for Grants
+"Apply for grants from the government.  Has a 50% chance to increase your financial resources by 2 units."
+Indiv
+none
+P=0.5(finance=2:0) 
+
+6
+Exchange Exploratory Knowledge
+"Sell exploratory knowledge for financial resources.  Decreases exploratory knowledge by 2, but gain 1 financial unit."
+Indiv
+none
+finance=1:0 explore=-2:0 
+
+7
+Apply for Patents
+"Apply for a patent.  Costs the applicant 2 units of finance but increases exploratory knowledge by 2 units."
+Joint
+none
+finance=0:0 
+finance=0:0 
+finance=-2:0 explore=2:0 
+
+8
+Develop a Marketing Plan
+"Develop a marketing plan to focus on alternative markets.  Costs both parties 1 unit of finance and increases exploitative knowledge by 2.  Can only be done once."
+Joint
+N=8 
+finance=0:0 
+finance=0:0 
+finance=-1:0 exploit=2:0 
+
+9
+Form Joint Ventures
+"Join with another player.  The player with less connections will disappear from the network while the other will gain the sum of their combined resources  (To make decisions together, you should sit next to each other in real life).  In order to view this decision's many prerequisites, click the 'View More Details' button."
+Joint
+D=2 joinprereq 
+finance=0:0 
+finance=0:0 
+join 
+
+10
+Develop Operations/Manufacturing
+"Develop operations and/or manufacturing.  Costs both players 2 units of finance, but has a 30% chance to grant an income of 1 unit of finance per round.  Developing a marketing plan increases your chance of gaining income.  To make this decision, you must have Traveled for Funds."
+Joint
+D=2 D=7 explore=8 
+finance=0:0 
+finance=0:0 
+finance=-2:0 P=0.3(f_change==1:0) 
+
+11
+Outsource Production
+"Outsource production of the wireless LED components.  Costs both players 2 units of finance, but has a 30% chance of granting an income of 1 unit of finance per round."
+Joint
+none
+finance=0:0 
+finance=0:0 
+finance=-2:0 P=0.3(f_change==1:0) 
+
+12
+Apply for Grants
+"Apply for grants from another player.  The applicant gains 3 units of finance, while the recipient loses 3 units of finance but has a 50% chance to gain an income of 1 unit of finance per round."
+Joint
+none
+finance=0:0 
+finance=0:0 
+jointgrant 
+
+13
+Exchange Exploitative Knowledge
+"Sell exploitative knowledge for financial resources.  Decreases exploitative knowledge by 2, but gain 1 financial unit."
+Indiv
+none
+finance=1:0 exploit=-2:0 
+
+14
+Purchase Exploratory Knowledge
+"Purchase exploratory knowledge with financial resources.  Decreases finance by 1 unit, but increases exploratory knowledge by 2."
+Indiv
+a_role=F 
+finance=-1:0 explore=2:0 
+
+15
+Purchase Exploitative Knowledge
+"Purchase exploitative knowledge with financial resources.  Decreases finance by 1 unit, but increases exploitative knowledge by 2."
+Indiv
+a_role=F 
+finance=-1:0 exploit=2:0 
+
+16
+Accept Board Position
+"Accept a position on the board.  Decreases finance by 3, but grants 1 unit of exploratory knowledge per turn for R&Ds, or 1 unit of exploitative knowledge per turn for Manufacturers."
+Indiv
+a_role=R N=16 
+finance=-3:0 explore_change=1:0 
+
+17
+Accept Board Position
+"Accept a position on the board.  Decreases finance by 3, but grants 1 unit of exploratory knowledge per turn for R&Ds, or 1 unit of exploitative knowledge per turn for Manufacturers."
+Indiv
+a_role=M N=17 
+finance=-3:0 exploit_change=1:0 
+
+999
+Do Nothing
+"Take no action for this round."
+Indiv
+none
+finance=0:0 

@@ -1,0 +1,77 @@
+[2017-10-16 0:0:48] Broadcasting server to network...
+[2017-10-16 0:0:53] Our IP is 192.168.0.5
+[2017-10-16 0:0:56] Client attempted to choose name: Table
+[2017-10-16 0:0:56] Approved name Table: YES
+
+[2017-10-16 0:1:4] ROUND 1
+
+[2017-10-16 0:1:6] Player Table made the decision: Apply for Grants
+[2017-10-16 0:1:6] They have the following resources:
+[2017-10-16 0:1:6] Finance : 11
+[2017-10-16 0:1:6] Exploratory Knowledge: 8
+[2017-10-16 0:1:6] Exploitative Knowledge: 10
+[2017-10-16 0:1:6] Finance income/outcome per turn: 0
+
+[2017-10-16 0:1:6] ROUND 2
+
+[2017-10-16 0:1:7] Player Table made the decision: Apply for Grants
+[2017-10-16 0:1:7] They have the following resources:
+[2017-10-16 0:1:7] Finance : 13
+[2017-10-16 0:1:7] Exploratory Knowledge: 8
+[2017-10-16 0:1:7] Exploitative Knowledge: 10
+[2017-10-16 0:1:7] Finance income/outcome per turn: 0
+
+[2017-10-16 0:1:7] ROUND 3
+
+[2017-10-16 0:1:9] Player Table made the decision: Apply for Grants
+[2017-10-16 0:1:9] They have the following resources:
+[2017-10-16 0:1:9] Finance : 13
+[2017-10-16 0:1:9] Exploratory Knowledge: 8
+[2017-10-16 0:1:9] Exploitative Knowledge: 10
+[2017-10-16 0:1:9] Finance income/outcome per turn: 0
+
+[2017-10-16 0:1:9] ROUND 4
+
+[2017-10-16 0:1:10] Player Table made the decision: Apply for Grants
+[2017-10-16 0:1:10] They have the following resources:
+[2017-10-16 0:1:10] Finance : 15
+[2017-10-16 0:1:10] Exploratory Knowledge: 8
+[2017-10-16 0:1:10] Exploitative Knowledge: 10
+[2017-10-16 0:1:10] Finance income/outcome per turn: 0
+
+[2017-10-16 0:1:10] ROUND 5
+
+[2017-10-16 0:1:12] Player Table made the decision: Apply for Grants
+[2017-10-16 0:1:12] They have the following resources:
+[2017-10-16 0:1:12] Finance : 17
+[2017-10-16 0:1:12] Exploratory Knowledge: 8
+[2017-10-16 0:1:12] Exploitative Knowledge: 10
+[2017-10-16 0:1:12] Finance income/outcome per turn: 0
+
+[2017-10-16 0:1:12] ROUND 6
+
+[2017-10-16 0:1:13] Player Table made the decision: Apply for Grants
+[2017-10-16 0:1:13] They have the following resources:
+[2017-10-16 0:1:13] Finance : 19
+[2017-10-16 0:1:13] Exploratory Knowledge: 8
+[2017-10-16 0:1:13] Exploitative Knowledge: 10
+[2017-10-16 0:1:13] Finance income/outcome per turn: 0
+
+[2017-10-16 0:1:13] ROUND 7
+
+[2017-10-16 0:1:15] Player Table made the decision: Apply for Grants
+[2017-10-16 0:1:15] They have the following resources:
+[2017-10-16 0:1:15] Finance : 21
+[2017-10-16 0:1:15] Exploratory Knowledge: 8
+[2017-10-16 0:1:15] Exploitative Knowledge: 10
+[2017-10-16 0:1:15] Finance income/outcome per turn: 0
+
+[2017-10-16 0:1:15] ROUND 8
+
+[2017-10-16 0:1:16] Player Table made the decision: Apply for Grants
+[2017-10-16 0:1:16] They have the following resources:
+[2017-10-16 0:1:16] Finance : 23
+[2017-10-16 0:1:16] Exploratory Knowledge: 8
+[2017-10-16 0:1:16] Exploitative Knowledge: 10
+[2017-10-16 0:1:16] Finance income/outcome per turn: 0
+

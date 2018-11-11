@@ -1,0 +1,31 @@
+//Notes for myself
+//Example format for "conditonals replace existing effect" Indiv decisions:
+//Decision ID
+//Conditionals Name
+//R 2 (don't forget to -1 index in the code)
+//P=1(f_change=1:0)
+//
+//Example format for "conditionals add to" indiv decisions:
+//Decision ID
+//Conditionals Name
+//A
+//explore=3:0
+//
+//Example format for replace or add for JOINT decisions:
+//Decision ID
+//Conditionals Name
+//A
+//nothing
+//A
+//nothing
+//R 1 2 3 (replaces three effects)
+//P=1(f_change=1:0) explore=5:0 exploit=5:0
+
+10
+Marketing Plan Developed
+A
+nothing
+A
+nothing
+R 2
+P=0.5(f_change==1:0)

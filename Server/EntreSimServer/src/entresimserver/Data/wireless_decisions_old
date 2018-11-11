@@ -1,0 +1,92 @@
+//FORMAT IS:
+//TITLE
+//DESCRIPTION (in quotes "")
+//OUTCOME (abbreviations are: explore = exploratory, exploit = exploitative, finance = financial, f_change = ongoing financial
+//TYPE (Indiv or Joint)
+//
+//note that outcome format is: abbreviation=NUMBER and are separated by a space.
+//
+//EXAMPLE
+//Do Something
+//"Do something.  Increases your financial resources by 10, but decreases it by 1 each turn"
+//finance=10 f_change=-1
+//Indiv
+//
+//If you want to change this file, please create a backup first,
+//ensure the formatting is all correct and make sure that the outcomes match the description.
+
+
+//INDIVIDUAL
+Hire Professional
+"Hire a professional for marketing or business development.
+Increases exploitative knowledge by 2, but costs 2 units of financial resources."
+exploit=2 finance=-2
+Indiv
+
+Hire CEO
+"Hire a CEO with experience in start-ups, particularly capital fund raising.
+Will improve exploitative research by 3, but costs 1 unit of finance at the end of each turn."
+exploit=3 f_change=-1
+Indiv
+
+Travel for Funds
+"Travel to raise funds from other Australian capital cities.
+Will cost 1 unit of finance for travel expenses, but has a chance to increase gain 3 units of finance back the next round."
+finance=-1 
+//d_finance=3:0.5
+Indiv
+
+Develop Marketing Plan
+"Develop a marketing plan to focus on possible markets.  
+Improves exploitative research by 3, but costs 3 units of finance."
+exploit=3 finance=-3
+Indiv
+
+Further Technology Development
+"Improves exploratory research by 1."
+explore=1
+Indiv
+
+Hire Software Professional
+"Hire a software professional to help out with integration of data into application software, etc.
+Improves exploitative and exploratory research by 1, but costs 1 unit of finance at the end of each turn."
+exploit=1 explore=1 f_change=-1
+Indiv
+
+Marketing/Business Development
+"Hire people skilled in marketing or business development to focus on different markets.
+Improve exploitative research by 4, but costs 2 units of finance at the end of each turn.
+CURRENTLY INCOMPLETE and will be updated to rebuild an entrepreneur's financial resources later on."
+exploit=4 f_change=-2
+Indiv
+
+Travel for Research
+"Travel to research-oriented places like Silicon Valley.
+Improves exploitative research by 2, but costs 1 unit of finance."
+exploit=2 finance=-1
+Indiv
+
+Operations/Manufacturing
+"Manufacture or outsource the production of embedded systems within the lights.
+Increases financial resources by 2 and improves exploitative research by 1."
+finance=2 exploit=1
+Indiv
+
+Apply for Grants
+"Apply for industry grants to further the applications for research on improving distances 
+between wireless installations and gateway controllers.
+Increases financial resources by 3 and improves exploratory research by 1."
+finance=3 explore=1
+Indiv
+
+JOINT Finance Request
+"Request Financial Resources from a partner.
+If accepted, increases requester's financial resources by 3 and decreases partner's financial resources by 3."
+finance=3
+Joint
+
+JOINT Exploitative Knowledge Mutual Gain
+"Work with partner to gain more exploitative knowledge.
+If accepted, both parties gain 2 exploitative knowledge."
+exploit=2
+Joint
