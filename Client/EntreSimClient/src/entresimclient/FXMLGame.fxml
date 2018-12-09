@@ -58,7 +58,6 @@
             <Font size="16.0" />
          </font>
       </Label>
-        <TextArea fx:id="txtLog" editable="false" layoutX="7.0" layoutY="7.0" prefHeight="76.0" prefWidth="517.0" wrapText="true" />
         <TextArea fx:id="txtInfo" layoutX="534.0" layoutY="7.0" prefHeight="177.0" prefWidth="265.0" wrapText="true" />
         <Button fx:id="btnInfo" layoutX="8.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleBtnInfo" prefHeight="60.0" prefWidth="60.0">
          <graphic>
@@ -68,7 +67,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <AnchorPane fx:id="paneCanvas" layoutX="7.0" layoutY="84.0" prefHeight="300.0" prefWidth="517.0" style="-fx-background-color: -fx-shadow-highlight-color, -fx-body-color, -fx-outer-border, -fx-inner-border; -fx-background-insets: 0 0 -1 0, 0, 1, 2;" />
+      <AnchorPane fx:id="paneCanvas" layoutX="7.0" layoutY="6.0" prefHeight="378.0" prefWidth="517.0" style="-fx-background-color: -fx-shadow-highlight-color, -fx-body-color, -fx-outer-border, -fx-inner-border; -fx-background-insets: 0 0 -1 0, 0, 1, 2;" />
       <AnchorPane fx:id="paneComparator" layoutX="7.0" layoutY="387.0" prefHeight="190.0" prefWidth="517.0" style="-fx-background-color: -fx-shadow-highlight-color, -fx-body-color, -fx-outer-border, -fx-inner-border; -fx-background-insets: 0 0 -1 0, 0, 1, 2;" />
         <GridPane layoutX="803.0" layoutY="3.0" prefHeight="50.0" prefWidth="265.0">
             <columnConstraints>

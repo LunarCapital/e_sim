@@ -31,6 +31,9 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -68,6 +71,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -76,8 +80,6 @@ import javafx.stage.Window;
  */
 public class FXMLGameController implements Initializable {
 
-    @FXML
-    private TextArea txtLog;
     @FXML
     private ComboBox<String> cmbPlayers;
     @FXML
@@ -159,6 +161,8 @@ public class FXMLGameController implements Initializable {
     private String name;
     private String initial_values;
     private PrereqChecker prereq_checker;
+    private FXMLGameLogController log_controller;
+    Timeline display_flasher;
 
     private HashMap<Shape, Integer> shape_to_id;
     private HashMap<Integer, Shape> id_to_shape;
@@ -173,7 +177,6 @@ public class FXMLGameController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        txtLog.setEditable(false);
         txtInfo.setEditable(false);
         graphics_handler = new GraphicsHandler();
         lines = new ArrayList<>();
@@ -212,6 +215,42 @@ public class FXMLGameController implements Initializable {
         t2.setDaemon(true);
         t1.start();
         t2.start();
+
+        //FLASH HIDE/SHOW BUTTONS
+        display_flasher = new Timeline(
+                new KeyFrame(Duration.seconds(0.2), e -> {
+                    btnDisplayFinance.setStyle("-fx-background-color: red");
+                    btnDisplayExplore.setStyle("-fx-background-color: red");
+                    btnDisplayExploit.setStyle("-fx-background-color: red");
+                }),
+                new KeyFrame(Duration.seconds(0.4), e -> {
+                    btnDisplayFinance.setStyle("-fx-background-color: green");
+                    btnDisplayExplore.setStyle("-fx-background-color: green");
+                    btnDisplayExploit.setStyle("-fx-background-color: green");
+                })
+        );
+        display_flasher.setCycleCount(Animation.INDEFINITE);
+        
+        openLogWindow();
+    }
+
+    private void openLogWindow() {
+        try { //Open up proposal window, everything should be empty
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/entresimclient/FXMLGameLog.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene((Pane) loader.load()));
+            stage.setResizable(false);
+            log_controller = loader.<FXMLGameLogController>getController();
+
+            stage.setOnCloseRequest(evt -> {
+                evt.consume();
+            });
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLGameController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void chooseName() {
@@ -238,7 +277,7 @@ public class FXMLGameController implements Initializable {
             }
 
             Alert alert = new Alert(AlertType.INFORMATION);
-            alert.initModality(Modality.APPLICATION_MODAL);
+            //alert.initModality(Modality.APPLICATION_MODAL);
             Stage alert_stage = (Stage) alert.getDialogPane().getScene().getWindow();
             alert_stage.setAlwaysOnTop(true);
 
@@ -251,7 +290,8 @@ public class FXMLGameController implements Initializable {
                 alert.setContentText("The tutor is loading a game from a previous session.  Please ensure that your name is the same as the last time you played.  If you can't remember, the tutor can show you a list of names.  If you are still having trouble, one of your classmates may have taken your name.");
                 alert.showAndWait();
             } else {
-                txtLog.appendText("Name Approved!\nPlease wait for the game to start.\n");
+                //txtLog.appendText("Name Approved!\nPlease wait for the game to start.\n");
+                writeText("Name Approved!\nPlease wait for the game to start.\n");
             }
         }
         System.out.println("Name approved: " + name);
@@ -365,6 +405,8 @@ public class FXMLGameController implements Initializable {
 
             //Draw Network
             setupCanvas();
+
+            display_flasher.play();
         }
     }
 
@@ -388,8 +430,9 @@ public class FXMLGameController implements Initializable {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("A partner has attempted to make a joint decision with you.");
         alert.setHeaderText("From Player: " + requester_name + ", to you: " + name);
-        alert.initModality(Modality.WINDOW_MODAL);
-        alert.initOwner(txtLog.getScene().getWindow());
+        alert.initModality(Modality.NONE);
+        Stage alert_stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        alert_stage.setAlwaysOnTop(true);
         Window alert_window = alert.getDialogPane().getScene().getWindow();
 
         if (!prereq_checker.checkNegativeJointKnowledge(decision, env, name)) {
@@ -398,6 +441,7 @@ public class FXMLGameController implements Initializable {
             alert.showAndWait();
             System.out.println("Auto declined due to lack of resources");
             outstream.setData(new EData("JOINT_ACK", "NO " + requester_name));
+            writeText(requester_name + " attempted to make joint decision '" + decision.title + "' with you, but you lacked the resources to accept.");
         } else {
             alert.setContentText("Description: " + description + "\nWould you like to accept?");
 
@@ -439,11 +483,13 @@ public class FXMLGameController implements Initializable {
             if (result.get() == buttonTypeYes) {
                 System.out.println("Pressed yes");
                 outstream.setData(new EData("JOINT_ACK", "YES " + requester_name + " " + decision_id));
+                writeText(requester_name + " attempted to make joint decision '" + decision.title + "' with you, and you accepted.");
             } else if (result.get() == buttonTypeDetails) {
                 //Should carry out the above eventfilter without closing the alert
             } else {
                 System.out.println("Pressed no/cancel");
                 outstream.setData(new EData("JOINT_ACK", "NO " + requester_name));
+                writeText(requester_name + " attempted to make joint decision '" + decision.title + "' with you, but you declined.");
             }
             System.out.println(result.get().toString());
         }
@@ -457,20 +503,23 @@ public class FXMLGameController implements Initializable {
         alert.setTitle("You've been offered a partnership.");
         alert.setHeaderText("From Player: " + name + ", to you: " + this.name);
         alert.setContentText("Do you accept?");
-        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initModality(Modality.NONE);
         Stage alert_stage = (Stage) alert.getDialogPane().getScene().getWindow();
         alert_stage.setAlwaysOnTop(true);
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             outstream.setData(new EData("PAIR_ACK", "YES " + name));
+            writeText(name + " attempted to form a partnership with you, and you accepted.");
         } else {
             outstream.setData(new EData("PAIR_ACK", "NO " + name));
+            writeText(name + " attempted to form a partnership with you, but you declined.");
         }
     }
 
     public void writeText(String text) {
-        txtLog.appendText(text + "\n");
+        //txtLog.appendText(text + "\n");
+        log_controller.writeTxtLog(text, round_num);
     }
 
     public void resetJoint() {
@@ -531,8 +580,9 @@ public class FXMLGameController implements Initializable {
         lblExploitChange.setText("" + p.exploit_change);
 
         int our_id = env.name_to_int.get(name);
-        graphics_handler.winGraph(windata, our_id, txtLog.getScene().getWindow());
+        graphics_handler.winGraph(windata, our_id, txtInfo.getScene().getWindow());
 
+        log_controller.close();
         System.exit(0);
     }
 
@@ -551,6 +601,10 @@ public class FXMLGameController implements Initializable {
             outstream.setData(new EData("DECISION", "" + indiv_choice_id));
             disableAll();
             btnLock.setText("Lock Individual Decision and End Turn");
+            display_flasher.stop();
+            btnDisplayFinance.setStyle("");
+            btnDisplayExplore.setStyle("");
+            btnDisplayExploit.setStyle("");
         } else {
             Decision d = null;
             for (Decision each : decisions) {
@@ -570,6 +624,7 @@ public class FXMLGameController implements Initializable {
                 lblNotify.setTextFill(Color.web("#FF0000"));
                 lblNotify.setText("You have ended your turn and must wait for the next round.");
                 disableAll();
+                writeText("You locked in the decision '" + d.title + "'");
             } else {
                 dialogComment("The prequisites to make this decision are not met.\n" + reason);
             }
@@ -590,6 +645,7 @@ public class FXMLGameController implements Initializable {
             if (env.network[env.name_to_int.get(name)][env.name_to_int.get(selected)] == -1) { //not already partners
                 cmbPlayers.getItems().remove(selected);
                 outstream.setData(new EData("PAIR_REQUEST", selected));
+                writeText("You made a partnership request to the player '" + selected + "'");
                 return;
             } else {
                 selfComment("Regarding your partnership request", "", "You are already a partner with this person!");
@@ -614,7 +670,7 @@ public class FXMLGameController implements Initializable {
         if (!(reason = prereq_checker.checkNegativeKnowledge(d, env, name)).equals("")) {
             dialogComment(reason);
         } else if ((reason = prereq_checker.checkPrerequisites(d.prereqs, env, name, selected)).equals("")) {
-            writeText("Sending joint decision request to " + selected);
+            writeText("Sending joint decision request '" + d.title + "' to " + selected);
             outstream.setData(new EData("JOINT_REQUEST", selected + " " + joint_choice_id));
             btnJoint.setDisable(true);
             lblNotify.setTextFill(Color.web("#ffae22"));
@@ -717,13 +773,13 @@ public class FXMLGameController implements Initializable {
     }
 
     private void disableAll() {
-        vboxIndiv.setDisable(true);
-        vboxJoint.setDisable(true);
+        //vboxIndiv.setDisable(true);
+        //vboxJoint.setDisable(true);
         cmbPlayers.setDisable(true);
         btnPartner.setDisable(true);
         btnLock.setDisable(true);
         btnJoint.setDisable(true);
-        btnDetails.setDisable(true);
+        //btnDetails.setDisable(true);
 
         btnDisplayFinance.setDisable(true);
         btnDisplayExplore.setDisable(true);
@@ -797,7 +853,8 @@ public class FXMLGameController implements Initializable {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDecisionQuickView.fxml"));
                 Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
+                //stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setAlwaysOnTop(true);
                 stage.setScene(new Scene((Pane) loader.load()));
                 stage.setResizable(false);
 

@@ -157,7 +157,8 @@ public class FXMLClientController implements Initializable {
                 try { //Open new window
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLGame.fxml"));
                     Stage stage = new Stage();
-                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.initOwner((Stage) txtManual.getScene().getWindow());
+                    stage.initModality(Modality.WINDOW_MODAL);
                     stage.setScene(new Scene((Pane) loader.load()));
                     stage.setResizable(false);
                     
