@@ -405,6 +405,9 @@ public class FXMLGameController implements Initializable {
             initial_values = "My initial resource values are: " + "Finance: " + me.finance + ", Exploratory: " + me.explore + ", Exploitative: " + me.exploit + ".";
             indiv_choice_id = 0;
             enableShowBtns();
+            btnDetails.setDisable(true);
+            vboxIndiv.setDisable(true);
+            vboxJoint.setDisable(true);
 
             //Draw Network
             setupCanvas();
@@ -622,6 +625,9 @@ public class FXMLGameController implements Initializable {
             outstream.setData(new EData("SHOW", show));
             outstream.setData(new EData("DECISION", "" + indiv_choice_id));
             disableAll();
+            btnDetails.setDisable(false);
+            vboxIndiv.setDisable(false);
+            vboxJoint.setDisable(false);
             btnLock.setText("Lock Individual Decision and End Turn");
             display_flasher.stop();
             btnDisplayFinance.setStyle("");
