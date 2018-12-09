@@ -45,6 +45,10 @@ public class FXMLGameLogController implements Initializable {
         }
     }
     
+    public String getTxtLog() {
+        return txtLog.getText();
+    }
+    
     public void close() {
         Stage log_stage = (Stage) txtLog.getScene().getWindow();
         log_stage.close();

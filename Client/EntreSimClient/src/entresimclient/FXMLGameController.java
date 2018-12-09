@@ -14,10 +14,12 @@ import entresimclient.Objects.GraphicsHandler;
 import entresimclient.Objects.PrereqChecker;
 import entresimclient.Runnables.ClientInStream;
 import entresimclient.Runnables.ClientOutStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
@@ -197,13 +199,6 @@ public class FXMLGameController implements Initializable {
     }
 
     public void init(Socket s) {
-        try {
-            PrintStream out = new PrintStream(new FileOutputStream("../../../client_error_log.txt"));
-            System.setErr(out);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FXMLGameController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         socket = s;
         recv_latch = new CyclicBarrier(2);
         outstream = new ClientOutStream(socket);
@@ -230,7 +225,7 @@ public class FXMLGameController implements Initializable {
                 })
         );
         display_flasher.setCycleCount(Animation.INDEFINITE);
-        
+
         openLogWindow();
     }
 
@@ -296,6 +291,14 @@ public class FXMLGameController implements Initializable {
         }
         System.out.println("Name approved: " + name);
         lblName.setText(name);
+
+        try {
+            PrintStream error_out = new PrintStream(new FileOutputStream("../../../" + name + "_client_error_log.txt"));
+            System.setErr(error_out);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FXMLGameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void populateChoiceButtons(TreeSet<Decision> decisions_package) {
@@ -581,6 +584,25 @@ public class FXMLGameController implements Initializable {
 
         int our_id = env.name_to_int.get(name);
         graphics_handler.winGraph(windata, our_id, txtInfo.getScene().getWindow());
+
+        try {
+            PrintStream out = new PrintStream(new FileOutputStream("../../../" + name + "_client_error_log.txt"));
+            System.setErr(out);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FXMLGameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            File client_log = new File("../../../" + name + "_client_game_log.txt");
+            client_log.getParentFile().mkdirs();
+            client_log.createNewFile();
+            PrintWriter out = new PrintWriter(client_log);
+            out.print(log_controller.getTxtLog());
+            out.flush();
+            out.close();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
 
         log_controller.close();
         System.exit(0);
